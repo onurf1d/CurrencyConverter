@@ -5,9 +5,12 @@ module com.onur.currencyconverter {
     requires java.net.http;
     requires java.desktop;
 
+
     opens com.onur.currencyconverter.controller to javafx.fxml;
 
+
     exports com.onur.currencyconverter.controller;
+
 
     opens com.onur.currencyconverter to javafx.fxml;
     exports com.onur.currencyconverter;
