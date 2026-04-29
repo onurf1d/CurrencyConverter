@@ -1,18 +1,26 @@
 💱 Currency Converter (JavaFX)
 
+
 A clean and efficient desktop application for real-time currency conversion using the Frankfurter API.
 
 
+
 🌟 Key Features
+
+
 Real-time Rates: Up-to-date data from Frankfurter Open API.
 
+
 Smart UI: Dynamic flag icons and currency symbols for a better user experience.
+
 
 Caching Engine: Local caching system to reduce API calls and improve performance.
 
 
 
 🛠️ Tech Stack
+
+
 Java 25
 
 JavaFX (UI Design)
