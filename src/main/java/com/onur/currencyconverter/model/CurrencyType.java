@@ -3,7 +3,10 @@ package com.onur.currencyconverter.model;
 public enum CurrencyType {
         EUR("Euro", "€", "euflag.png"),
         USD("US Dollar", "$", "usaflag.png"),
-        TRY("Turkish Lira", "₺", "turkishflag.png");
+        TRY("Turkish Lira", "₺", "turkishflag.png"),
+        GBP("British Pound Sterling", "£", "ukflag.png"),
+        JPY("Japanese Yen", "¥", "jpnflag.png"),
+        CHF("Swiss Franc", "Fr", "swissflag.png");
 
         private final String fullName;
         private final String symbol;
