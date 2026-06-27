@@ -6,7 +6,8 @@ public enum CurrencyType {
         TRY("Turkish Lira", "₺", "turkishflag.png"),
         GBP("British Pound Sterling", "£", "ukflag.png"),
         JPY("Japanese Yen", "¥", "jpnflag.png"),
-        CHF("Swiss Franc", "Fr", "swissflag.png");
+        CHF("Swiss Franc", "Fr", "swissflag.png"),
+        CNY("Chinese Yuan", "¥", "chineseflag.png");
 
         private final String fullName;
         private final String symbol;

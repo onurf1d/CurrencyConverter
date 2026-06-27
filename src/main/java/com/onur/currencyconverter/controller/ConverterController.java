@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
 
 import com.onur.currencyconverter.logic.ConverterLogic;
 import com.onur.currencyconverter.model.CurrencyType;
@@ -11,6 +16,7 @@ import com.onur.currencyconverter.model.CurrencyType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -28,6 +34,10 @@ public class ConverterController implements Initializable {
 
     @FXML private ComboBox<CurrencyType> toCombo;
 
+    @FXML private Label lblDate;
+
+    @FXML private Button btnExchange;
+
     ConverterLogic cl = new ConverterLogic();
 
     @Override
@@ -36,6 +46,17 @@ public class ConverterController implements Initializable {
 
         fromCombo.setItems(currencyList);
         toCombo.setItems(currencyList);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy   HH:mm:ss");
+        lblDate.setText(LocalDateTime.now().format(formatter));
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            lblDate.setText(LocalDateTime.now().format(formatter));
+            })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
 
         Callback<ListView<CurrencyType>, ListCell<CurrencyType>> cellFactory = lv -> new ListCell<>() {
             @Override
@@ -99,9 +120,11 @@ public class ConverterController implements Initializable {
                     txtTo.setText("");
                     return;
                 }
-//                if(from.equals(to)) {
-//                    txtTo.setText(txtFrom.getText());
-//                }
+
+                if(isSameCurrency()) {
+                    txtTo.setText(txtFrom.getText());
+                    return;
+                }
 
                 BigDecimal amount = new BigDecimal(input);
 
@@ -120,6 +143,12 @@ public class ConverterController implements Initializable {
                     txtFrom.setText("");
                     return;
                 }
+
+                if(isSameCurrency()) {
+                    txtFrom.setText(txtTo.getText());
+                    return;
+                }
+
                 BigDecimal amount = new BigDecimal(input);
 
                 String result = cl.convert(to, from, amount).toString();
@@ -130,4 +159,30 @@ public class ConverterController implements Initializable {
         }
 
     }
+
+    @FXML
+    void clickedBtnExchange(ActionEvent event) {
+        Button button = (Button) event.getSource();
+
+        String fromValue = fromCombo.getValue().name();
+        String toValue = toCombo.getValue().name();
+
+        fromCombo.setValue(CurrencyType.valueOf(toValue));
+        toCombo.setValue(CurrencyType.valueOf(fromValue));
+
+        String txtToValue = txtTo.getText();
+
+        txtTo.setText(txtFrom.getText());
+        txtFrom.setText(txtToValue);
+
+    }
+
+    private boolean isSameCurrency() {
+        if(fromCombo.getValue().getFullName().equals(toCombo.getValue().getFullName())) {
+
+            return true;
+        }
+        return false;
+    }
+
 }
