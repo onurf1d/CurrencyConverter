@@ -11,6 +11,7 @@
     -fx-padding: 10;
     -fx-font-size: 13px;
     -fx-text-fill: #2f3640;
+    -fx-font-weight: bold;
 }
 
 .text-field:focused {
@@ -68,4 +69,18 @@
 
 .equalsLabel {
     -fx-font-size: 24;
+}
+
+.button {
+    -fx-background-color: #1E2A3E;
+    -fx-text-fill: white;
+    -fx-transition: all 0.1s ease-in-out;
+    -fx-border-width: 2px;
+    -fx-border-color: #D4AF37;
+}
+
+.button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+    -fx-background-color: #2980b9;
 }
